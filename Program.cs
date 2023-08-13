@@ -19,7 +19,7 @@ builder.Services.AddDbContext<InMemoryDbContext>(options =>options.UseInMemoryDa
 
 builder.Services.AddMassTransit(x =>
 {
-    x.AddConsumer<InsertCityConsumer<InMemoryDbContext>>();
+    x.AddConsumer<InsertCityConsumer>();
 
     x.UsingRabbitMq((context, config) =>
     {
@@ -28,7 +28,7 @@ builder.Services.AddMassTransit(x =>
 
         config.ReceiveEndpoint("service-b-queue", e =>
         {
-            e.ConfigureConsumer<InsertCityConsumer<InMemoryDbContext>>(context);
+            e.ConfigureConsumer<InsertCityConsumer>(context);
         });
     });
 });

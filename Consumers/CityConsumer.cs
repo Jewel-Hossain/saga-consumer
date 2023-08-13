@@ -1,9 +1,9 @@
-public class InsertCityConsumer<TDbContext> : IConsumer<InsertCity> where TDbContext : DbContext
+public class InsertCityConsumer : IConsumer<InsertCity>
 {
-    private readonly TDbContext _dbContext;
+    private readonly InMemoryDbContext _dbContext;
     private readonly IPublishEndpoint _publishEndpoint;
 
-    public InsertCityConsumer(TDbContext dbContext, IPublishEndpoint publishEndpoint)
+    public InsertCityConsumer(InMemoryDbContext dbContext, IPublishEndpoint publishEndpoint)
     {
         _dbContext = dbContext;
         _publishEndpoint = publishEndpoint;
@@ -20,9 +20,8 @@ public class InsertCityConsumer<TDbContext> : IConsumer<InsertCity> where TDbCon
                 IsProcessed = true
             };
 
-            throw new Exception();
 
-            _dbContext.Add(city);
+            _dbContext.Cities.Add(city);
             await _dbContext.SaveChangesAsync();
 
             var message = new CityInsertionSucceeded
