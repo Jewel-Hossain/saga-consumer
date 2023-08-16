@@ -8,29 +8,14 @@ public class City
     public required string Name { get; set; }
     public DateTime CreatedAt { get; set; }
     public bool IsProcessed { get; set; }
+    public bool IsActive { get; set; }
 }//class
 
-public class InsertCity : CorrelatedBy<Guid>
+public class CityDelete
 {
-    public Guid CorrelationId { get; set; }
-    public City City { get; set; }
-}
+    public Guid Id { get; set; }
+    public bool IsActive { get; set; }
+}//class
 
-public class CityAdded : CorrelatedBy<Guid>
-{
-    public Guid CorrelationId { get; set; }
-    public City City { get; set; }
-}
 
-public class CityInsertionSucceeded : CorrelatedBy<Guid>
-{
-    public Guid CorrelationId { get; set; }
-     public Guid CityId { get; set; }
-}
-
-public class CityInsertionFailed : CorrelatedBy<Guid>
-{
-    public Guid CorrelationId { get; set; }
-     public Guid CityId { get; set; }
-}
 

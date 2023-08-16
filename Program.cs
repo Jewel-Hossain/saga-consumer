@@ -15,21 +15,24 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<InMemoryDbContext>(options =>options.UseInMemoryDatabase("service-b-db"));
+builder.Services.AddDbContext<InMemoryDbContext>(options => options.UseInMemoryDatabase("service-b-db"));
 
 builder.Services.AddMassTransit(x =>
 {
     x.AddConsumer<InsertCityConsumer>();
+    x.AddConsumer<UpdateCityConsumer>();
+    x.AddConsumer<DeleteCityConsumer>();
+    x.AddConsumer<InsertCuisineConsumer>();
 
     x.UsingRabbitMq((context, config) =>
     {
-         var connection = new Uri("amqp://admin:admin2023@18.138.164.11:5672");
+        var connection = new Uri("amqp://admin:admin2023@18.138.164.11:5672");
         config.Host(connection);
 
-        config.ReceiveEndpoint("service-b-queue", e =>
-        {
-            e.ConfigureConsumer<InsertCityConsumer>(context);
-        });
+        config.ReceiveEndpoint("city-add-consumer", e => e.ConfigureConsumer<InsertCityConsumer>(context));
+        config.ReceiveEndpoint("city-update-consumer", e => e.ConfigureConsumer<UpdateCityConsumer>(context));
+        config.ReceiveEndpoint("city-delete-consumer", e => e.ConfigureConsumer<DeleteCityConsumer>(context));
+        config.ReceiveEndpoint("cuisine-add-consumer", e => e.ConfigureConsumer<InsertCuisineConsumer>(context));
     });
 });
 
