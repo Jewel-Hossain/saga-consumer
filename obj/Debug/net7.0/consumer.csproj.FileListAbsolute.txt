@@ -38,3 +38,4 @@ C:\Users\xEm\Desktop\SAGA\consumer\obj\Debug\net7.0\refint\consumer.dll
 C:\Users\xEm\Desktop\SAGA\consumer\obj\Debug\net7.0\consumer.pdb
 C:\Users\xEm\Desktop\SAGA\consumer\obj\Debug\net7.0\consumer.genruntimeconfig.cache
 C:\Users\xEm\Desktop\SAGA\consumer\obj\Debug\net7.0\ref\consumer.dll
+c:\Users\xEm\Desktop\SAGA\consumer\bin\Debug\net7.0\Consumers\City\test.json

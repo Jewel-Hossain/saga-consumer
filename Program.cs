@@ -19,6 +19,7 @@ builder.Services.AddDbContext<InMemoryDbContext>(options => options.UseInMemoryD
 
 builder.Services.AddMassTransit(x =>
 {
+    x.AddConsumer<CityConsumer>();
     x.AddConsumer<InsertCityConsumer>();
     x.AddConsumer<UpdateCityConsumer>();
     x.AddConsumer<DeleteCityConsumer>();
@@ -28,6 +29,7 @@ builder.Services.AddMassTransit(x =>
     {
         var connection = new Uri("amqp://admin:admin2023@18.138.164.11:5672");
         config.Host(connection);
+        config.ReceiveEndpoint("city-add1-consumer", e => e.ConfigureConsumer<CityConsumer>(context));
 
         config.ReceiveEndpoint("city-add-consumer", e => e.ConfigureConsumer<InsertCityConsumer>(context));
         config.ReceiveEndpoint("city-update-consumer", e => e.ConfigureConsumer<UpdateCityConsumer>(context));

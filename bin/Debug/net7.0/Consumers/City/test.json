@@ -1,0 +1,16 @@
+
+{
+    "messageType": [
+        "urn:message:SAGA.Models:AddCity"
+    ],
+    "message": {
+        "CorrelationId":"17f8a950-cadd-41ab-aea4-1ba5a007a793",
+        "City": {
+            "Id": "33642c38-afd2-4de6-a84a-708277320f9f",
+            "Name":"In the name of Allah",
+            "CreatedAt": "2023-08-22T17:43:34.153Z",
+            "IsProcessed": false,
+            "IsActive": true
+        }
+    }
+}
